@@ -11,7 +11,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form @submit.prevent="editPost">
+        <form >
           <div class="mb-3">
             <label for="Name" class="col-form-label">Name:</label>
             <input type="text" class="form-control" id="name" v-model="name">
@@ -31,7 +31,7 @@
             <input type="text" class="form-control" id="contact" v-model="contact">
             
           </div>
-        <button type="submit" class="btn btn-primary">edit</button>
+        <button type="submit" class="btn btn-primary" v-on:click="editProfile(_id)">edit</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -56,9 +56,10 @@
 
 <script>
 export default {
-  props:['id'],
+  // props:['id'],
 data(){
       return{
+        user:null,
         id: localStorage.getItem("id"),
         name: localStorage.getItem("name"),
         email: localStorage.getItem("email"),
@@ -82,11 +83,11 @@ data(){
         .then(res => res.json())
         .catch(error => console.error('Error:', error))
         .then(response => console.log('Success:', response));
-        // this.$router.go()
+        this.$router.push({name:'Login'})
           }
     },
     },
-    editPost(){
+    editProfile: function(id){
       if (!localStorage.getItem("jwt")) {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
@@ -94,12 +95,10 @@ data(){
       fetch("https://socialmediaapp1234.herokuapp.com/users/" + this.id, {
         method: "PUT",
         body: JSON.stringify({
-          name:this.name,
-          email:this.email,
-          avatar:this.avatar,
+          name: this.name,
+          email: this.email,
           contact:this.contact,
-
-
+          avatar:this.avatar
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -108,15 +107,13 @@ data(){
       })
         .then((response) => response.json())
         .then((json) => {
-          this.blog = json
-          alert("User Updated");
-          this.$router.go();
+          alert("Post Updated");
+        this.$router.go()
         })
         .catch((err) => {
           alert(err);
         });
   }
-  
 }
 </script>
 

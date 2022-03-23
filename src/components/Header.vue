@@ -15,7 +15,7 @@
 
         <div class="dropdown text-end">
           <a to="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://i.postimg.cc/BbR009Pj/fredrik-solli-wandem-V0e-ECO6-ITq-A-unsplash.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+            <img :src="avatar" alt="mdo" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <!-- <li><router-link class="dropdown-item" to="/createpost" style="font-size:18px">Add post</router-link></li> -->
@@ -33,6 +33,11 @@
 
 <script>
 export default {
+  data(){
+    return{
+avatar: localStorage.getItem("avatar"),
+    }
+  },
 methods:{
   logout(){
     localStorage.clear();

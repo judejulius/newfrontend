@@ -61,8 +61,8 @@ export default {
 
   });
       this.msg = `${ this.name }  Registered Successfuly`;
-       alert("Logging in...");
-          this.$router.push({ name: "Home" });
+       alert("Registered Successfull");
+          this.$router.push({ name: "Login" });
     },
   },
 };
