@@ -47,7 +47,7 @@
     <h4 class="mb-5"><b>Email: {{email}}</b></h4>
     <h4 class="mb-5"><b>Contact: {{contact}}</b></h4>
   </div>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button><br>
 <button type="button" class="btn btn-primary" v-on:click="deleteProfile(id)" >Delete</button>
 </div>
           <!-- .end .wrap -->

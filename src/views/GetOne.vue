@@ -7,62 +7,39 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       Edit
             </button>
-            <div class="grid vertical-align" v-if="blog" style="margin-top:50px">
+            <div class="grid vertical-align" v-if="blog" style="margin-top:50px;margin-bottom:200px">
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Your Details Below</h5>
-        
-                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                   <div class="modal-body">
-               <form
-                  class="requires-validation"
-                  @submit.prevent="editPost"
-                >
-                  <div class="col-md-12">
-                    <label >title</label>
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      v-model="title"
-                    /> <br>
-                  </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">title</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="title">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Description</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="body">
 
-                  <div class="col-md-12">
-                      <label for="">desciption</label><br>
-                    <input
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Image</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="img">
 
-                      type="text"
-                      placeholder="Email"
-
-                      v-model="body"
-                    /> <br>
-                  </div>
-                  <div class="col-md-12">
-                      <label for="">image</label><br>
-                    <input
-
-                      type="text"
-                      v-model="img"
-                      placeholder="Password"
-
-                    /> 
-                  </div> <br>
-                  <div class="form-button mt-3">
-                    <button id="submit" type="submit" data-bs-dismiss="modal"  class="btn btn-primary">
-                      Edit
-                    </button>
-                  </div>
-                </form> 
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" v-on:click="editBlog(blog._id)">Edit</button>
       </div>
-                    </div>
-                </div>
-              </div>
+    </div>
+  </div>
+</div>
            <div class="column">
                 <figure>
                   <img :src="blog.img" class="please" alt="">
@@ -78,9 +55,9 @@
               </div>
               <!-- end .column-->
               <!-- end figure-->
+            <router-link to="/posts" class="view-btn btn border-primary" style="font-size:2rem">Go back</router-link>
             </div>
             <!-- end .grid-->
-            <router-link to="/posts" class="view-btn btn border-primary" style="font-size:2rem">Go back</router-link>
           </div>
           <!-- end .wrap-->
       <!-- <div v-else></div> -->
@@ -131,7 +108,7 @@ data(){
 //   },
 mounted() {
       if(this.id, localStorage.getItem("jwt")){
-  fetch("https://socialmediaapp1234.herokuapp.com/posts" + this.id, {
+  fetch("https://socialmediaapp1234.herokuapp.com/posts/" + this.id, {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -146,16 +123,16 @@ mounted() {
   
   },
    methods:{
-      editPost(){
+      editBlog: function(id){
       if (!localStorage.getItem("jwt")) {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch("https://socialmediaapp1234.herokuapp.com/posts", {
+      fetch("https://socialmediaapp1234.herokuapp.com/posts/" + id, {
         method: "PUT",
         body: JSON.stringify({
-          title:this.title,
-          body:this.body,
+          title: this.title,
+          body: this.body,
           img:this.img
         }),
         headers: {
@@ -165,9 +142,8 @@ mounted() {
       })
         .then((response) => response.json())
         .then((json) => {
-          this.blog = json
-          alert("User Updated");
-          this.$router.push({ name: "UserProfile" });
+          alert("Post Updated");
+        this.$router.go()
         })
         .catch((err) => {
           alert(err);

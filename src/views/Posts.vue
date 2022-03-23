@@ -6,12 +6,13 @@
             <div class="grid vertical-align" v-for="blog of blogs"
         :key="blog._id"
         :to="{ name: 'Home', params: { id: blog.id } }">
+      
          <div class="dropdown text-center" style="float:right">
           <a to="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-            <li><button v-on:click="deletePosts(blog.id)">Delete</button></li>
-            <li><router-link to="/editPost">Edit</router-link></li>
+            <li><button v-on:click="deletePosts(blog._id)">Delete</button></li>
+            <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button></li>
           </ul>
         </div>
            <div class="column">
@@ -84,7 +85,7 @@ mounted() {
 
     deletePosts: function (id) {
       if (localStorage.getItem("jwt")){
-        fetch('http://localhost:5000/posts/'+ id ,{
+        fetch('https://socialmediaapp1234.herokuapp.com/posts/'+ id +'?_method=delete',{
           method: 'DELETE',
           headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -96,12 +97,38 @@ mounted() {
         .catch(error => console.error('Error:', error))
    
         .then(response => console.log('Success:', response));
-        alert("Note Deleted")
+        alert("posts Deleted")
          this.$router.go();
         
           }
     },
-            },
+    editBlog: function(id){
+      if (!localStorage.getItem("jwt")) {
+        alert("User not logged in");
+        return this.$router.push({ name: "Login" });
+      }
+      fetch("https://socialmediaapp1234.herokuapp.com/posts/" + id, {
+        method: "PUT",
+        body: JSON.stringify({
+          title: this.title,
+          body: this.body,
+          img:this.img
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          alert("Post Updated");
+        this.$router.go()
+        })
+        .catch((err) => {
+          alert(err);
+        });
+  }
+  },
    computed:{
     filterBlogs:function(){
       return this.blogs.filter((product) =>{
