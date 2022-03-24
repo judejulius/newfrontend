@@ -15,7 +15,7 @@
 
         <div class="dropdown text-end">
           <a to="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img :src="avatar" alt="mdo" width="32" height="32" class="rounded-circle">
+           <p>{{name}}</p>
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <!-- <li><router-link class="dropdown-item" to="/createpost" style="font-size:18px">Add post</router-link></li> -->
@@ -35,7 +35,7 @@
 export default {
   data(){
     return{
-avatar: localStorage.getItem("avatar"),
+name: localStorage.getItem("name"),
     }
   },
 methods:{

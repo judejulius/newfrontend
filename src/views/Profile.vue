@@ -22,11 +22,6 @@
             
           </div>
           <div class="mb-3">
-            <label for="avatar" class="col-form-label">Avatar:</label>
-            <input type="text" class="form-control" id="avatar" v-model="avatar">
-            
-          </div>
-          <div class="mb-3">
             <label for="Contact" class="col-form-label">Contact:</label>
             <input type="text" class="form-control" id="contact" v-model="contact">
             
@@ -41,7 +36,7 @@
   </div>
 </div>
          <div class="card text-left" style="margin-left:auto;margin-right:auto">
-  <img :src="avatar" alt="Avatar" style="width:50%;margin-left:auto;margin-right:auto">
+  <!-- <img :src="avatar" alt="Avatar" style="width:50%;margin-left:auto;margin-right:auto"> -->
   <div class="container">
     <h4 class="mb-5"><b>Name: {{name}}</b></h4> 
     <h4 class="mb-5"><b>Email: {{email}}</b></h4>
@@ -130,5 +125,8 @@ data(){
 
 .container {
   padding: 2px 16px;
+}
+label,input{
+  font-size: 2.5rem;
 }
 </style>

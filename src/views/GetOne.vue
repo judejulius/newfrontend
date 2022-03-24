@@ -4,38 +4,38 @@
               
             
                             <!-- <router-link to="/editPost" class="view-btn btn border-primary" style="font-size:2rem">Edit</router-link> -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" class="view-btn btn border-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size:2rem;">
                       Edit
             </button>
-            <div class="grid vertical-align" v-if="blog" style="margin-top:50px;margin-bottom:200px">
+            <button class="view-btn btn border-primary" style="font-size:2rem;margin-left:10px" v-on:click="deletePosts(blog._id)">Delete</button>
+            <router-link to="/posts" class="view-btn btn border-primary" style="font-size:2rem;margin-left:10px">Go back</router-link>
+            <div class="grid vertical-align" v-if="blog" style="margin-top:50px">
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="margin-top:50px">
         <form>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">title</label>
-            <input type="text" class="form-control" id="recipient-name" v-model="title">
+            <label for="recipient-name" class="col-form-label" style="font-size:30px">title</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="title" style="font-size:20px">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Description</label>
-            <input type="text" class="form-control" id="recipient-name" v-model="body">
+            <label for="message-text" class="col-form-label" style="font-size:30px">Description</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="body" style="font-size:20px">
 
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Image</label>
-            <input type="text" class="form-control" id="recipient-name" v-model="img">
+            <label for="message-text" class="col-form-label" style="font-size:30px">Image</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="img" style="font-size:20px">
 
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" v-on:click="editBlog(blog._id)">Edit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -55,7 +55,6 @@
               </div>
               <!-- end .column-->
               <!-- end figure-->
-            <router-link to="/posts" class="view-btn btn border-primary" style="font-size:2rem">Go back</router-link>
             </div>
             <!-- end .grid-->
           </div>
@@ -148,7 +147,27 @@ mounted() {
         .catch((err) => {
           alert(err);
         });
-  }
+  },
+  
+    deletePosts: function (id) {
+      if (localStorage.getItem("jwt")){
+        fetch('https://socialmediaapp1234.herokuapp.com/posts/'+ id ,{
+          method: 'DELETE',
+          headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+        })
+        
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+   
+        .then(response => console.log('Success:', response));
+        alert("posts Deleted")
+         this.$router.push({name:'Posts'});
+        
+          }
+    },
 }
   
 }
@@ -159,5 +178,7 @@ mounted() {
 background-color: rgb(55, 55, 241);
 color: white;
 }
-
+section{
+  height: 100vh;
+}
 </style>

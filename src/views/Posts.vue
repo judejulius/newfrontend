@@ -6,15 +6,6 @@
             <div class="grid vertical-align" v-for="blog of blogs"
         :key="blog._id"
         :to="{ name: 'Home', params: { id: blog.id } }">
-      
-         <div class="dropdown text-center" style="float:right">
-          <a to="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            </a>
-          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-            <li><button v-on:click="deletePosts(blog._id)">Delete</button></li>
-            <li><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button></li>
-          </ul>
-        </div>
            <div class="column">
                 <figure>
                   <img :src="blog.img" class="please" alt="">
@@ -83,25 +74,6 @@ mounted() {
   },
   methods:{
 
-    deletePosts: function (id) {
-      if (localStorage.getItem("jwt")){
-        fetch('https://socialmediaapp1234.herokuapp.com/posts/'+ id +'?_method=delete',{
-          method: 'DELETE',
-          headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-        })
-        
-        .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-   
-        .then(response => console.log('Success:', response));
-        alert("posts Deleted")
-         this.$router.go();
-        
-          }
-    },
     editBlog: function(id){
       if (!localStorage.getItem("jwt")) {
         alert("User not logged in");
