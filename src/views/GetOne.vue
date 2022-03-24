@@ -142,7 +142,7 @@ mounted() {
         .then((response) => response.json())
         .then((json) => {
           alert("Post Updated");
-        this.$router.go()
+        this.$router.push({name:'Posts'})
         })
         .catch((err) => {
           alert(err);
