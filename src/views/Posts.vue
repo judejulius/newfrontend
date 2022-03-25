@@ -2,8 +2,9 @@
         <section id="section-14" class="slide current" style="margin-top:100px;">
           <div class="wrap fadeInUp" v-if="blogs">
             <router-link to="/createPost"  class="view-btn btn border-primary" style="font-size:2rem;float:right">Add Post</router-link>
-            
-            <div class="grid vertical-align" v-for="blog of blogs"
+            <h5>Search by author </h5>
+            <input type="search" name="" id="search" v-model="search">
+            <div class="grid vertical-align" v-for="blog of filterBlogs"
         :key="blog._id"
         :to="{ name: 'Home', params: { id: blog.id } }" style="margin-bottom:100px">
            <div class="column">
@@ -103,8 +104,8 @@ mounted() {
   },
    computed:{
     filterBlogs:function(){
-      return this.blogs.filter((product) =>{
-        return blog .category.match(this.search)
+      return this.blogs.filter((blog) =>{
+        return blog.author.match(this.search)
       })
     }
   }
@@ -113,6 +114,9 @@ mounted() {
 </script>
 
 <style scoped>
+#search{
+  width: 20%;
+}
 .view-btn:hover{
 background-color: rgb(55, 55, 241);
 color: white;
