@@ -14,7 +14,8 @@
         </ul>
 
         <div class="dropdown text-end">
-          <a to="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <a to="/" class="d-block link-dark text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-arrow-down-circle-fill" style="font-size:2.5rem"></i>
            <p>{{name}}</p>
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
@@ -59,5 +60,7 @@ ul li{
   text-decoration: none;
   box-shadow: none;
 }
-
+.dropdown:hover{
+  cursor: pointer;
+}
 </style>

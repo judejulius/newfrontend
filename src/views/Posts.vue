@@ -17,7 +17,7 @@
                    {{blog.title}}
                 </h2>
                 <p class="text-intro">{{blog.body}}</p>
-                <router-link to="/profile" class="text-intro"><span><img :src="blog.avatar" alt="" class="" style="border-radius:100%;width:2%"></span> {{blog.author}}</router-link>
+                <a href="" class="text-intro"><span><img :src="blog.avatar" alt="" class="" style="border-radius:100%;width:2%"></span> {{blog.author}}</a>
                 <p class="text-intro">{{blog.date}}</p>
                 <router-link :to="{name:'GetOne', params:{id:blog._id}}"  class="view-btn btn border-primary" style="font-size:2rem">View</router-link>
               </div>
@@ -120,5 +120,15 @@ mounted() {
 .view-btn:hover{
 background-color: rgb(55, 55, 241);
 color: white;
+}
+@media only screen and (max-width: 1000px) {
+  .wrap {
+   margin-top: 50px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .wrap {
+   margin-top: 100px;
+  }
 }
 </style>
