@@ -43,7 +43,16 @@
     <h4 class="mb-5"><b>Contact: {{contact}}</b></h4>
   </div>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Edit</button><br>
-<button type="button" class="btn btn-primary" v-on:click="deleteProfile(id)" >Delete</button>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+    Delete
+  </button>
+<div style="">
+  <div class="collapse collapse-horizontal" id="collapseWidthExample">
+    <div class="card card-body" style="width: 300px;">
+      Are you sure you want to delete user? <button type="button" class="btn btn-primary" v-on:click="deleteProfile(id)" >Delete</button>
+    </div>
+  </div>
+</div>
 </div>
           <!-- .end .wrap -->
         </section>

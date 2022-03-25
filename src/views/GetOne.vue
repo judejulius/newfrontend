@@ -7,7 +7,9 @@
                             <button type="button" class="view-btn btn border-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size:2rem;">
                       Edit
             </button>
-            <button class="view-btn btn border-primary" style="font-size:2rem;margin-left:10px" v-on:click="deletePosts(blog._id)">Delete</button>
+             <button class="view-btn btn border-primary" style="font-size:2rem;margin-left:10px" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Delete
+  </button>
             <router-link to="/posts" class="view-btn btn border-primary" style="font-size:2rem;margin-left:10px">Go back</router-link>
             <div class="grid vertical-align" v-if="blog" style="margin-top:50px">
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,6 +40,15 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
+  </div>
+</div>
+<p>
+ 
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+   Are you sure you want to delete <br><br> 
+   <button class="view-btn btn border-primary" style="font-size:2rem;margin-left:10px" v-on:click="deletePosts(blog._id)">Delete</button>
   </div>
 </div>
            <div class="column">
@@ -142,7 +153,8 @@ mounted() {
         .then((response) => response.json())
         .then((json) => {
           alert("Post Updated");
-        // this.$router.push({name:'Posts'})
+        this.$router.push({name:'Posts'})
+        
         })
         .catch((err) => {
           alert(err);
@@ -178,7 +190,7 @@ mounted() {
 background-color: rgb(55, 55, 241);
 color: white;
 }
-section{
+.wrap{
   height: 100vh;
 }
 </style>
