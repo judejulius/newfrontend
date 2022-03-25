@@ -1,15 +1,17 @@
 <template>
-        <section id="section-14" class="slide current" style="margin-top:100px">
-          <div class="wrap fadeInUp" >
+        <section id="section-14" class="slide current" style="">
+          <div class="wrap fadeInUp" style="padding-top:100px" >
               
-            
+            <div style="margin:0;text-align:center">
                             <!-- <router-link to="/editPost" class="view-btn btn border-primary" style="font-size:2rem">Edit</router-link> -->
                             <button type="button" class="view-btn btn border-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-size:2rem;">
                       Edit
             </button>
             <button class="view-btn btn border-primary" style="font-size:2rem;margin-left:10px" v-on:click="deletePosts(blog._id)">Delete</button>
             <router-link to="/posts" class="view-btn btn border-primary" style="font-size:2rem;margin-left:10px">Go back</router-link>
-            <div class="grid vertical-align" v-if="blog" style="margin-top:50px">
+
+            </div>
+            <div class="grid vertical-align" v-if="blog" style="margin:0">
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -142,8 +144,8 @@ mounted() {
         .then((response) => response.json())
         .then((json) => {
           alert("Post Updated");
-        this.$router.push({name:'Posts'})
         })
+
         .catch((err) => {
           alert(err);
         });
@@ -163,11 +165,36 @@ mounted() {
         .catch(error => console.error('Error:', error))
    
         .then(response => console.log('Success:', response));
-        alert("posts Deleted")
+        alert("Post Deleted")
          this.$router.push({name:'Posts'});
         
           }
     },
+      comments: function(id){
+      if (!localStorage.getItem("jwt")) {
+        alert("User not logged in");
+        return this.$router.push({ name: "Login" });
+      }
+      fetch("https://socialmediaapp1234.herokuapp.com/posts/" + id, {
+        method: "PUT",
+        body: JSON.stringify({
+          comment:this.comments
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          alert("comment uploaded");
+        })
+        
+        .catch((err) => {
+          alert(err);
+        });
+  },
+  
 }
   
 }
@@ -178,7 +205,5 @@ mounted() {
 background-color: rgb(55, 55, 241);
 color: white;
 }
-section{
-  height: 100vh;
-}
+
 </style>

@@ -1,11 +1,11 @@
 <template>
-        <section id="section-14" class="slide current" style="margin-top:100px;margin-bottom:100px">
+        <section id="section-14" class="slide current" style="margin-top:100px;">
           <div class="wrap fadeInUp" v-if="blogs">
             <router-link to="/createPost"  class="view-btn btn border-primary" style="font-size:2rem;float:right">Add Post</router-link>
             
             <div class="grid vertical-align" v-for="blog of blogs"
         :key="blog._id"
-        :to="{ name: 'Home', params: { id: blog.id } }">
+        :to="{ name: 'Home', params: { id: blog.id } }" style="margin-bottom:100px">
            <div class="column">
                 <figure>
                   <img :src="blog.img" class="please" alt="">
@@ -112,7 +112,7 @@ mounted() {
 }
 </script>
 
-<style>
+<style scoped>
 .view-btn:hover{
 background-color: rgb(55, 55, 241);
 color: white;

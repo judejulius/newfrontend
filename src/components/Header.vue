@@ -40,8 +40,8 @@ name: localStorage.getItem("name"),
   },
 methods:{
   logout(){
+    alert('GoodBye' + " " + json.user.name)
     localStorage.clear();
-    alert('user is logged out')
     this.$router.push({name:'Login'})
   }
 }

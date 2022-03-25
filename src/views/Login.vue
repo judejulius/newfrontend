@@ -51,7 +51,7 @@ export default {
           localStorage.setItem("avatar", json.user.avatar);
           localStorage.setItem("email", json.user.email);
           localStorage.setItem("contact", json.user.contact);
-          alert("User logged in");
+          alert("Welcome back" + " " + json.user.name);
           this.$router.push({ name: "Home" });
         })
         .catch((err) => {
@@ -66,9 +66,8 @@ export default {
 section{
   height: 100vh;
 }
-form{
-  mask-image: g;
-  margin-top: 150px;
+fieldset{
+  margin-top: 200px;
+  margin-bottom: auto;
 }
-
 </style>

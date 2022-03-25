@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .section{
   background-image:url('../assets/background.jpg') !important;
   height: 100vh;

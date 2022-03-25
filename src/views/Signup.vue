@@ -5,7 +5,7 @@
           <div class="wrap size-30">
             <form @submit.prevent="register" class="fadeInUp">
               <fieldset>
-                <legend>Welcome back</legend>
+                <legend>Welcome</legend>
                 <p><label>Name</label>
                   <input type="text" tabindex="1" name="name" placeholder="eg..Jone" required="" v-model="name">
                 </p>
@@ -19,7 +19,7 @@
                   <input type="password" tabindex="2" name="password" placeholder="6 characters minimum" required="" v-model="password">
                 </p>
                 <p>
-                  <button type="submit" tabindex="3" title="Login">Login ›</button>
+                  <button type="submit" tabindex="3" title="Login">Sign Up ›</button>
                 </p>
               </fieldset>
             </form>
@@ -71,7 +71,8 @@ export default {
 section{
   height: 100vh;
 }
-form{
-  margin-top: 50px;
+fieldset{
+  margin-top: 100px;
+  margin-bottom: auto;
 }
 </style>

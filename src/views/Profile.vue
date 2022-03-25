@@ -75,10 +75,13 @@ data(){
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
         })
-        .then(res => res.json())
+        .then((json) => {
+          alert("Going to miss you"), 
+        this.$router.push({name:'Login'})}
+        )
         .catch(error => console.error('Error:', error))
         .then(response => console.log('Success:', response));
-        this.$router.push({name:'Login'})
+        
           }
     },
     },
@@ -103,7 +106,6 @@ data(){
         .then((response) => response.json())
         .then((json) => {
           alert("Post Updated");
-        this.$router.go()
         })
         .catch((err) => {
           alert(err);
